@@ -20,5 +20,5 @@ st.data_editor(
         )
     },
     disabled=["widgets"],
-    hide_index=True,
+    hide_index=True
 )
