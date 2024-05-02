@@ -13,8 +13,8 @@ df = pd.DataFrame(data)
 st.data_editor(
     df,
     column_config={
-        "favorite": st.column_config.CheckboxColumn(
-            "Your favorite?",
+        "Vendido": st.column_config.CheckboxColumn(
+            "Vendido?",
             help="Select your **favorite** widgets",
             default=False,
         )
