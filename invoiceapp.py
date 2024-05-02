@@ -8,6 +8,21 @@ conn = st.experimental_connection("gsheets", type = GSheetsConnection)
 data = conn.read(spreadsheet=url)
 st.dataframe(data)
 
-selected_indices = st.multiselect('Select rows:', data.index, default=data.index)
-selected_rows = data.loc[selected_indices]
+df = pd.DataFrame(data)
+
+
+selected_indices = st.multiselect('Select rows:', df.index, default=df.index)
+selected_rows = df.loc[selected_indices]
 st.write('Selected Rows', selected_rows)
+
+if not selected_rows.empty:
+    # Convert DataFrame to CSV
+    csv = selected_rows.to_csv(index=False)
+    # Create a link to download the CSV file
+    
+    st.download_button(
+        label="Download selected rows as CSV",
+        data=csv,
+        file_name='selected_rows.csv',
+        mime='text/csv',
+    )
