@@ -10,15 +10,12 @@ st.dataframe(data)
 
 df = pd.DataFrame(data)
 
-st.data_editor(
-    df,
-    column_config={
-        "Vendido": st.column_config.CheckboxColumn(
-            "Vendido?",
-            help="Select your **favorite** widgets",
-            default=False,
-        )
-    },
-    disabled=["widgets"],
-    hide_index=True
-)
+if 'updated_df' not in st.session_state:
+    st.session_state.updated_df = df.copy()
+
+for i, row in st.session_state.updated_df.iterrows():
+    # The key ensures each checkbox is unique
+    new_value = st.checkbox("Vendido?", value=row['Vendido'], key=i, help="Select if sold")
+    st.session_state.updated_df.at[i, 'Vendido'] = new_value
+
+st.write("Updated DataFrame:", st.session_state.updated_df)
