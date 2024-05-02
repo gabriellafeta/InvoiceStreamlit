@@ -18,4 +18,4 @@ for i, row in st.session_state.updated_df.iterrows():
     new_value = st.checkbox("Vendido?", value=row['Vendido'], key=i, help="Select if sold")
     st.session_state.updated_df.at[i, 'Vendido'] = new_value
 
-st.write("Updated DataFrame:", st.session_state.updated_df)
+st.write("Updated DataFrame:", df)
