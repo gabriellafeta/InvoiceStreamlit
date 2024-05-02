@@ -7,3 +7,7 @@ url = "https://docs.google.com/spreadsheets/d/12Xz2kB_0mos07T-SGy6REs7yDvjxn3Y_5
 conn = st.experimental_connection("gsheets", type = GSheetsConnection)
 data = conn.read(spreadsheet=url)
 st.dataframe(data)
+
+selected_indices = st.multiselect('Select rows:', data.index, default=data.index)
+selected_rows = data.loc[selected_indices]
+st.write('Selected Rows', selected_rows)
